@@ -10,9 +10,11 @@ function SubscriptionsComp(props) {
   const dispatch = useDispatch();
   const [newSubscription, setNewSubscription] = useState(false);
 
-  useEffect(async () => {
-    let req = await axios.get("/api/subscriptions/");
-    dispatch({ type: "LOAD_SUBSCRIPTIONS", payload: req.data });
+  useEffect(() => {
+    (async () => {
+      let req = await axios.get("/api/subscriptions/");
+      dispatch({ type: "LOAD_SUBSCRIPTIONS", payload: req.data });
+    })();
   }, []);
 
   return (
@@ -23,11 +25,14 @@ function SubscriptionsComp(props) {
           Subscribe to new movie
         </button>
       )}
-      {newSubscription && <AddSubscription memberID={props.memberID} />}
-      {storeSubscriptions.map((subscription) => {
+      {newSubscription && (
+        <AddSubscription key={props.memberID} memberID={props.memberID} />
+      )}
+      {storeSubscriptions.map((subscription, index) => {
         if (subscription.movieID === props.movieID) {
           return (
             <SubscriptionComp
+              key={index}
               isMember={true}
               memberID={subscription.memberID}
               subscriptionDate={subscription.date}
@@ -35,8 +40,9 @@ function SubscriptionsComp(props) {
           );
         } else if (subscription.memberID === props.memberID) {
           return (
-            <div>
+            <div key={index}>
               <SubscriptionComp
+                key={index}
                 isMember={false}
                 movieID={subscription.movieID}
                 subscriptionDate={subscription.date}

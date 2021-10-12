@@ -14,11 +14,13 @@ function AddSubscriptionComp(props) {
   });
   const [memberSubscriptions, setMemberSubscriptions] = useState([]);
 
-  useEffect(async () => {
-    let req = await axios.get("/api/movies/");
-    dispatch({ type: "LOAD_MOVIES", payload: req.data });
-    req = await axios.get(`/api/subscriptions/member/${props.memberID}`);
-    setMemberSubscriptions(req.data);
+  useEffect(() => {
+    (async () => {
+      let req = await axios.get("/api/movies/");
+      dispatch({ type: "LOAD_MOVIES", payload: req.data });
+      req = await axios.get(`/api/subscriptions/member/${props.memberID}`);
+      setMemberSubscriptions(req.data);
+    })();
   }, [subscription]);
 
   if (storeMovies.length > 0) {

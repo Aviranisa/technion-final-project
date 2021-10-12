@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import cookie from "react-cookies";
 
 function EditMovieComp(props) {
   const history = useHistory();
@@ -13,16 +12,18 @@ function EditMovieComp(props) {
   const params = useParams("id");
   const [genre, setGenre] = useState("");
   const [movie, setMovie] = useState({});
-  useEffect(async () => {
+  useEffect(() => {
     if (storeMovies.length > 0) {
-      setMovie(storeMovies.filter((movie) => movie._id == params.id)[0]);
+      setMovie(storeMovies.filter((movie) => movie._id === params.movieID)[0]);
     } else {
-      let req = await axios.get(
-        `/api/movies/${props.movieID || params.movieID}`
-      );
-      setMovie(await req.data);
+      (async () => {
+        let req = await axios.get(
+          `/api/movies/${props.movieID || params.movieID}`
+        );
+        setMovie(await req.data);
+      })();
     }
-  }, [movie]);
+  }, []);
 
   const deleteGenre = (genreIndex) => {
     movie.genres.splice(genreIndex, 1);
@@ -72,7 +73,11 @@ function EditMovieComp(props) {
       <select id="genres">
         {movie.genres &&
           movie.genres.map((genre, i) => {
-            return <option value={i}>{genre}</option>;
+            return (
+              <option key={i} value={i}>
+                {genre}
+              </option>
+            );
           })}
       </select>
       <button

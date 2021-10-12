@@ -1,10 +1,9 @@
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import SubscriptionsComp from "./subscriptionsComp";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import cookie from "react-cookies";
 
 function MemberComp(props) {
   const [currentMember, setMember] = useState({});
@@ -18,11 +17,13 @@ function MemberComp(props) {
     });
   };
 
-  useEffect(async () => {
-    let req = await axios.get(
-      `/api/members/${props.memberID || params.memberID}`
-    );
-    setMember(await req.data);
+  useEffect(() => {
+    (async () => {
+      let req = await axios.get(
+        `/api/members/${props.memberID || params.memberID}`
+      );
+      setMember(await req.data);
+    })();
   }, []);
 
   const editMember = () => {
@@ -50,7 +51,10 @@ function MemberComp(props) {
       </button>
       <button onClick={() => deleteMember()}>Delete</button>
       <div>
-        <SubscriptionsComp memberID={props.memberID || params.memberID} />
+        <SubscriptionsComp
+          key={props.memberID || params.memberID}
+          memberID={props.memberID || params.memberID}
+        />
       </div>
     </div>
   );

@@ -3,8 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import cookie from "react-cookies";
 
 function LoginComp() {
   const [loginObj, setLoginobj] = useState({ userName: "", password: "" });

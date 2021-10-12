@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import SubscriptionsComp from "./subscriptionsComp";
 import "./App.css";
@@ -17,9 +17,13 @@ function MovieComp(props) {
     });
   };
 
-  useEffect(async () => {
-    let req = await axios.get(`/api/movies/${props.movieID || params.movieID}`);
-    setMovie(await req.data);
+  useEffect(() => {
+    (async () => {
+      let req = await axios.get(
+        `/api/movies/${props.movieID || params.movieID}`
+      );
+      setMovie(await req.data);
+    })();
   }, []);
 
   const editMovie = () => {
@@ -36,7 +40,7 @@ function MovieComp(props) {
       <strong>Geners</strong> :
       {currentMovie.genres &&
         currentMovie.genres.map((genre, i) => (
-          <span>
+          <span key={i}>
             {genre}
             {i < currentMovie.genres.length - 1 && ", "}
           </span>

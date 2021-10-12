@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import cookie from "react-cookies";
 
 function EditMemeberComp(props) {
   const history = useHistory();
@@ -16,20 +15,18 @@ function EditMemeberComp(props) {
     email: "",
     city: "",
   });
-  useEffect(async () => {
+  useEffect(() => {
     if (storeMembers.length > 0) {
       setMember(
-        storeMembers.filter((member) => member._id == params.memberID)[0]
+        storeMembers.filter((member) => member._id === params.memberID)[0]
       );
     } else {
-      const req = await axios.get(`/api/members/${params.memberID}`);
-      setMember(req.data);
+      (async () => {
+        const req = await axios.get(`/api/members/${params.memberID}`);
+        setMember(req.data);
+      })();
     }
   }, []);
-
-  useEffect(() => {
-    console.log(member);
-  }, [member]);
 
   return (
     <div className="App">

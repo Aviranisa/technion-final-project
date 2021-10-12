@@ -1,6 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import cookie from "react-cookies";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 

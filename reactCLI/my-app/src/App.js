@@ -12,8 +12,7 @@ import EditMovieComp from "./editMovieComp";
 import SubscriptionsComp from "./subscriptionsComp";
 import cookies from "react-cookies";
 import { useCookies } from "react-cookie";
-import { useHistory } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -23,15 +22,17 @@ function App() {
   const storeUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
+  useEffect(() => {
     if (cookies.load("webapp_token")) {
       if (!storeUser.id) {
-        let res = await axios.post("/api/auth/", { withCredentials: true });
-        if (res.status === 200) {
-          dispatch({ type: "SET_USER_DETAILS", payload: res.data });
-        } else {
-          dispatch({ type: "SET_USER_DETAILS" });
-        }
+        (async () => {
+          let res = await axios.post("/api/auth/", { withCredentials: true });
+          if (res.status === 200) {
+            dispatch({ type: "SET_USER_DETAILS", payload: res.data });
+          } else {
+            dispatch({ type: "SET_USER_DETAILS" });
+          }
+        })();
       }
     } else {
       dispatch({ type: "SET_USER_DETAILS" });

@@ -11,16 +11,20 @@ function MoviesComp() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  useEffect(async () => {
-    const req = await axios.get("/api/movies/");
-    dispatch({ type: "LOAD_MOVIES", payload: req.data });
-    if (searchValue === "") {
-      setMovies(req.data);
-    }
-  }, []);
+  useEffect(() => {
+    (async () => {
+      const req = await axios.get("/api/movies/");
+      dispatch({ type: "LOAD_MOVIES", payload: req.data });
+      if (searchValue === "") {
+        setMovies(req.data);
+      }
+    })();
+  }, [storeMovies]);
 
-  useEffect(async () => {
-    search(searchValue);
+  useEffect(() => {
+    (async () => {
+      search(searchValue);
+    })();
   }, [searchValue]);
 
   const search = (value) => {
@@ -39,21 +43,16 @@ function MoviesComp() {
   return (
     <div className="App">
       <br />
-      <Link to="/addMovie"> Add new movie</Link> &nbsp;
+      <Link to="/addMovie"> Add new movie</Link>
+      <br />
       <input
         type="text"
+        placeholder="Search movie here"
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
       />
-      <button
-        onClick={() => {
-          search(searchValue);
-        }}
-      >
-        Search
-      </button>
-      {movies.map((movie) => {
+      {movies.map((movie, index) => {
         return (
           <div
             style={{
