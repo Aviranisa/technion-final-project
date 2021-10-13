@@ -52,11 +52,13 @@ function MoviesComp() {
           setSearchValue(e.target.value);
         }}
       />
+      <br />
       {movies.map((movie, index) => {
         return (
           <div
             style={{
-              border: "1px solid",
+              display: "inline-grid",
+              gridTemplateColumns: 'repeat(auto - fill, minmax("12em", "1fr"))',
               height: "auto",
               width: 200,
               margin: "auto",

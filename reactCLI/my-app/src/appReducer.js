@@ -81,8 +81,8 @@ function appReducer(
       return { ...state, subscriptions: action.payload };
 
     case "ADD_SUBSCRIPTION":
-      (async () =>
-        axios.post(`/api/subscriptions/${action.payload.movieID}`))();
+      debugger;
+      (async () => axios.post("/api/subscriptions/", action.payload))();
       return {
         ...state,
         subscriptions: [...state.subscriptions, action.payload],

@@ -30,7 +30,16 @@ function MovieComp(props) {
     history.push(`/editMovie/${props.movieID || params.movieID}`);
   };
   return (
-    <div key={props.movieID || params.movieID} className="App">
+    <div
+      style={{
+        marginRight: "5px",
+        marginLeft: "5px",
+        border: "1px solid",
+        padding: "10px",
+      }}
+      key={props.movieID || params.movieID}
+      className="App"
+    >
       <strong>{currentMovie.name}</strong> ,{" "}
       <strong>{currentMovie.yearPremiered}</strong>
       <br />

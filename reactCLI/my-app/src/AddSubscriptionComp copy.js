@@ -7,28 +7,29 @@ import axios from "axios";
 function AddSubscriptionComp(props) {
   let dispatch = useDispatch();
   const storeMovies = useSelector((state) => state.movies);
+  const [memberSubscriptions, setMemberSubscriptions] = useState([]);
   const [subscription, setSubscription] = useState({
     movieID: "",
     date: "",
     memberID: props.memberID,
   });
-  const [memberSubscriptions, setMemberSubscriptions] = useState([]);
+
   useEffect(() => {
     (async () => {
-      let reqMovies = await axios.get("/api/movies/");
-      dispatch({ type: "LOAD_MOVIES", payload: reqMovies.data });
-      let req = await axios.get(`/api/subscriptions/member/${props.memberID}`);
+      let req = await axios.get("/api/movies/");
+      dispatch({ type: "LOAD_MOVIES", payload: req.data });
+      req = await axios.get(`/api/subscriptions/member/${props.memberID}`);
+      debugger;
       setMemberSubscriptions(req.data);
     })();
-  }, [subscription]);
+  }, []);
   if (storeMovies.length > 0) {
     let moviesToSubscribe = [];
     storeMovies.map((storeMovie) => {
-      if (
-        memberSubscriptions.filter(
-          (memberSubscription) => memberSubscription.movieID === storeMovie._id
-        ).length === 0
-      ) {
+      let l = memberSubscriptions.filter(
+        (memberSubscription) => memberSubscription.movieID === storeMovie._id
+      ).length;
+      if (l === 0) {
         moviesToSubscribe.push(storeMovie);
       }
     });
@@ -38,8 +39,12 @@ function AddSubscriptionComp(props) {
         <div className="App">
           Add a new movie <br />
           <select
+            id="movie"
             onChange={(e) => {
-              setSubscription({ ...subscription, movieID: e.target.value });
+              setSubscription({
+                ...subscription,
+                movieID: e.target.value,
+              });
             }}
           >
             {moviesToSubscribe.map((movieToSubscribe, index) => {
@@ -52,9 +57,9 @@ function AddSubscriptionComp(props) {
           </select>
           <input
             type="date"
-            onChange={(e) => {
-              setSubscription({ ...subscription, date: e.target.value });
-            }}
+            onChange={(e) =>
+              setSubscription({ ...subscription, date: e.target.value })
+            }
           />
           <br />
           <button

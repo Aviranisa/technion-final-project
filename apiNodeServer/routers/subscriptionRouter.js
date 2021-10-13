@@ -58,29 +58,4 @@ router.route("/").post(async (req, res) => {
 	}
 });
 
-router.route("/:id").put(async (req, res) => {
-	try {
-		let MovieToEdit = await moviesBL.editMovie(req.params.id, req.body);
-		if (!MovieToEdit) {
-			throw new Error("something went wrong.");
-		} else {
-			res.status(200).send(MovieToEdit);
-		}
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
-});
-
-router.route("/:id").delete(async (req, res) => {
-	try {
-		let MovieToDelete = await moviesBL.deleteMovie(req.params.id);
-		if (!MovieToDelete) {
-			throw new Error("something went wrong.");
-		} else {
-			res.status(200).send("deleted!");
-		}
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
-});
 module.exports = router;

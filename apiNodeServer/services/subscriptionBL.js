@@ -22,9 +22,12 @@ function addNewSubscription(subscription) {
 		});
 	});
 }
-
+async function getMemberSubscription(memberID) {
+	return await subscriptionModel.find({ memberID });
+}
 module.exports = {
 	getAllSubscriptions,
 	getSubscription,
 	addNewSubscription,
+	getMemberSubscription,
 };
