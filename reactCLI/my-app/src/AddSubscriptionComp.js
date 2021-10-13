@@ -58,6 +58,7 @@ function AddSubscriptionComp(props) {
           />
           <br />
           <button
+            className="btn"
             onClick={() => {
               if (subscription.date !== "" && subscription.movieID !== "") {
                 dispatch({ type: "ADD_SUBSCRIPTION", payload: subscription });

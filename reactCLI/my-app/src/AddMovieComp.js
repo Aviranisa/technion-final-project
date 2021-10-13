@@ -16,15 +16,17 @@ function AddMovieComp(props) {
   });
 
   return (
-    <div className="App">
-      Add Movie <br />
+    <div className="App" className="addNew">
+      <span className="App-header">Add Movie</span> <br />
       <input
+        className="input"
         type="text"
         placeholder="Movie name"
         onChange={(e) => setMovie({ ...newMovie, name: e.target.value })}
       />
       <br />
       <input
+        className="input"
         type="text"
         placeholder="Year premiered"
         onChange={(e) =>
@@ -33,6 +35,7 @@ function AddMovieComp(props) {
       />
       <br />
       <input
+        className="input"
         type="text"
         placeholder="genres"
         onChange={(e) =>
@@ -43,6 +46,7 @@ function AddMovieComp(props) {
         }
       />
       <button
+        className="btn"
         onClick={(e) => {
           setMovie({
             ...newMovie,
@@ -54,12 +58,14 @@ function AddMovieComp(props) {
       </button>
       <br />
       <input
+        className="input"
         type="text"
         placeholder="image URI"
         onChange={(e) => setMovie({ ...newMovie, image: e.target.value })}
       />
       <br />
       <button
+        className="btn"
         style={{ marginRight: 5 }}
         onClick={async () => {
           dispatch({ type: "ADD_MOVIE", payload: newMovie });
@@ -68,7 +74,9 @@ function AddMovieComp(props) {
       >
         save
       </button>
-      <button onClick={() => history.push("/movies")}>cancel</button>
+      <button className="btn" onClick={() => history.push("/movies")}>
+        cancel
+      </button>
     </div>
   );
 }

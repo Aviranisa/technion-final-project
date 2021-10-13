@@ -15,7 +15,6 @@ function LoginComp() {
     });
     if (res.status === 200) {
       dispatch({ type: "SET_USER_DETAILS", payload: res.data });
-      window.location.reload();
       history.push("/movies");
     }
   };
@@ -41,6 +40,7 @@ function LoginComp() {
       />
       <br />
       <button
+        className="logout-button"
         onClick={() => {
           login();
         }}

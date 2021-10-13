@@ -30,26 +30,20 @@ function MemberComp(props) {
     history.push(`/editMember/${props.memberID || params.memberID}`);
   };
   return (
-    <div
-      style={{
-        border: "1px solid",
-        height: "auto",
-        width: 250,
-        margin: "auto",
-      }}
-      key={props.memberID || params.memberID}
-      className="App"
-    >
+    <div className="member" key={props.memberID || params.memberID}>
       <strong>{currentMember.fullName}</strong>
-      <br />
       Email : <strong>{currentMember.email}</strong>
-      <br />
       City : <strong>{currentMember.city}</strong>
-      <br />
-      <button onClick={() => editMember()} style={{ marginRight: 5 }}>
+      <button
+        className="btn"
+        onClick={() => editMember()}
+        style={{ marginRight: 5 }}
+      >
         Edit
       </button>
-      <button onClick={() => deleteMember()}>Delete</button>
+      <button className="btn" onClick={() => deleteMember()}>
+        Delete
+      </button>
       <div>
         <SubscriptionsComp
           key={props.memberID || params.memberID}

@@ -28,13 +28,18 @@ function SubscriptionComp(props) {
     <div>
       {props.isMember ? (
         <div>
-          <Link to={`/member/${props.memberID}`}>{member.fullName}</Link>
+          <Link className="App-link2" to={`/member/${props.memberID}`}>
+            {member.fullName}
+          </Link>
           ,&nbsp;
           <span>{date.substring(0, 10)}</span>
         </div>
       ) : (
         <div>
-          <Link to={`/movie/${props.movieID}`}>{movie.name}</Link>,&nbsp;
+          <Link className="App-link2" to={`/movie/${props.movieID}`}>
+            {movie.name}
+          </Link>
+          ,&nbsp;
           <span>{date.substring(0, 10)}</span>
         </div>
       )}

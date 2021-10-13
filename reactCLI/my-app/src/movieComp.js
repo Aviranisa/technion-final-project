@@ -30,23 +30,11 @@ function MovieComp(props) {
     history.push(`/editMovie/${props.movieID || params.movieID}`);
   };
   return (
-    <div
-      style={{
-        marginRight: "5px",
-        marginLeft: "5px",
-        border: "1px solid",
-        padding: "10px",
-      }}
-      key={props.movieID || params.movieID}
-      className="App"
-    >
+    <div className="movie" key={props.movieID || params.movieID}>
       <strong>{currentMovie.name}</strong> ,{" "}
       <strong>{currentMovie.yearPremiered}</strong>
-      <br />
-      <br />
-      <img style={{ width: 150, height: 150 }} src={currentMovie.image}></img>
-      <br />
-      <strong>Geners</strong> :
+      <img style={{ width: 195, height: 200 }} src={currentMovie.image}></img>
+      <strong>Geners :</strong>
       {currentMovie.genres &&
         currentMovie.genres.map((genre, i) => (
           <span key={i}>
@@ -55,8 +43,12 @@ function MovieComp(props) {
           </span>
         ))}
       <br />
-      <button onClick={() => editMovie()}>Edit</button>
-      <button onClick={() => deleteMovie()}>Delete</button>
+      <button className="btn" onClick={() => editMovie()}>
+        Edit
+      </button>
+      <button className="btn" onClick={() => deleteMovie()}>
+        Delete
+      </button>
       <div>
         <SubscriptionsComp movieID={props.movieID || params.movieID} />
       </div>

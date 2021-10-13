@@ -19,38 +19,44 @@ function SubscriptionsComp(props) {
 
   return (
     <div className="App">
-      <br />
       {props.memberID && (
-        <button onClick={() => setNewSubscription(!newSubscription)}>
+        <button
+          className="btn"
+          onClick={() => setNewSubscription(!newSubscription)}
+        >
           Subscribe to new movie
         </button>
       )}
       {newSubscription && (
         <AddSubscription key={props.memberID} memberID={props.memberID} />
       )}
-      {storeSubscriptions.map((subscription, index) => {
-        if (subscription.movieID === props.movieID) {
-          return (
-            <SubscriptionComp
-              key={index}
-              isMember={true}
-              memberID={subscription.memberID}
-              subscriptionDate={subscription.date}
-            />
-          );
-        } else if (subscription.memberID === props.memberID) {
-          return (
-            <div key={index}>
-              <SubscriptionComp
-                key={index}
-                isMember={false}
-                movieID={subscription.movieID}
-                subscriptionDate={subscription.date}
-              />
-            </div>
-          );
-        }
-      })}
+      <div className="subscription">
+        {storeSubscriptions.map((subscription, index) => {
+          if (subscription.movieID === props.movieID) {
+            return (
+              <div key={index}>
+                <SubscriptionComp
+                  key={index}
+                  isMember={true}
+                  memberID={subscription.memberID}
+                  subscriptionDate={subscription.date}
+                />
+              </div>
+            );
+          } else if (subscription.memberID === props.memberID) {
+            return (
+              <div key={index}>
+                <SubscriptionComp
+                  key={index}
+                  isMember={false}
+                  movieID={subscription.movieID}
+                  subscriptionDate={subscription.date}
+                />
+              </div>
+            );
+          }
+        })}
+      </div>
     </div>
   );
 }

@@ -19,10 +19,14 @@ function MembersComp() {
   return (
     <div className="App">
       <br />
-      <Link to="/addMember"> Add new member</Link> &nbsp;
+      <Link className="App-link" to="/addMember">
+        {" "}
+        Add new member
+      </Link>
+      <br />
       {storeMembers.map((member, index) => {
         return (
-          <div key={index}>
+          <div className="members" key={index}>
             <MemberComp
               memberID={member._id}
               memberFullName={member.fullName}

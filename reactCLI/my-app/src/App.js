@@ -46,11 +46,18 @@ function App() {
   if (storeLoggedIn) {
     return (
       <div className="App">
-        Welcome {storeUser.fullName}
-        <button onClick={() => logout()}>Logout</button>
+        <div className="App-header">Welcome {storeUser.fullName}</div>
+        <button className="logout-button" onClick={() => logout()}>
+          Logout
+        </button>
         <br />
-        <Link to="/movies">Movies</Link>&nbsp;
-        <Link to="/members">members</Link>
+        <Link className="App-link" to="/movies">
+          Movies
+        </Link>
+        <Link className="App-link" to="/members">
+          members
+        </Link>
+        <br />
         <Switch>
           <Route exact path="/">
             <MoviesComp />
@@ -88,7 +95,7 @@ function App() {
   } else {
     return (
       <div className="App">
-        <span>Welcome</span>
+        <span className="App-header">Welcome</span>
         <LoginComp />
       </div>
     );

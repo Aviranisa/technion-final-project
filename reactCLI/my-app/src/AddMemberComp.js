@@ -14,21 +14,24 @@ function AddMemberComp(props) {
   });
 
   return (
-    <div className="App">
-      Add Member <br />
+    <div className="App" className="addNew">
+      <span className="App-header">Add Member</span> <br />
       <input
+        className="input"
         type="text"
         placeholder="Full name"
         onChange={(e) => setMember({ ...newMember, fullName: e.target.value })}
       />
       <br />
       <input
+        className="input"
         type="text"
         placeholder="Email"
         onChange={(e) => setMember({ ...newMember, email: e.target.value })}
       />
       <br />
       <input
+        className="input"
         type="text"
         placeholder="City"
         onChange={(e) =>
@@ -40,6 +43,7 @@ function AddMemberComp(props) {
       />
       <br />
       <button
+        className="btn"
         style={{ marginRight: 5 }}
         onClick={async () => {
           dispatch({ type: "ADD_MEMBER", payload: newMember });
@@ -48,7 +52,9 @@ function AddMemberComp(props) {
       >
         save
       </button>
-      <button onClick={() => history.push("/members")}>cancel</button>
+      <button className="btn" onClick={() => history.push("/members")}>
+        cancel
+      </button>
     </div>
   );
 }

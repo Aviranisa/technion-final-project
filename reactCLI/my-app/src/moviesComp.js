@@ -43,9 +43,12 @@ function MoviesComp() {
   return (
     <div className="App">
       <br />
-      <Link to="/addMovie"> Add new movie</Link>
+      <Link className="App-link" to="/addMovie">
+        Add new movie
+      </Link>
       <br />
       <input
+        className="inputSearch"
         type="text"
         placeholder="Search movie here"
         onChange={(e) => {
@@ -55,16 +58,7 @@ function MoviesComp() {
       <br />
       {movies.map((movie, index) => {
         return (
-          <div
-            style={{
-              display: "inline-grid",
-              gridTemplateColumns: 'repeat(auto - fill, minmax("12em", "1fr"))',
-              height: "auto",
-              width: 200,
-              margin: "auto",
-            }}
-            key={movie._id}
-          >
+          <div className="movies" key={movie._id}>
             <MovieComp
               movieID={movie._id}
               movieName={movie.name}
