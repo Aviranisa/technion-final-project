@@ -36,10 +36,11 @@ function EditMovieComp(props) {
   };
 
   return (
-    <div className="App">
-      Edit Movie <br />
+    <div className="App" className="addNewAndEdit">
+      <span className="App-header">Edit Movie</span> <br />
       Movie name :
       <input
+        className="input"
         type="text"
         value={movie.name}
         onChange={(e) => setMovie({ ...movie, name: e.target.value })}
@@ -47,6 +48,7 @@ function EditMovieComp(props) {
       <br />
       year Premiered :{" "}
       <input
+        className="input"
         type="text"
         value={movie.yearPremiered}
         onChange={(e) =>
@@ -56,12 +58,14 @@ function EditMovieComp(props) {
       <br />
       Genres :
       <input
+        className="input"
         id="addGenreInput"
         type="text"
         placeholder="Add genres"
         onChange={(e) => setGenre(e.target.value)}
       />
       <button
+        className="btn"
         onClick={(e) => {
           document.getElementById("addGenreInput").value = "";
           addGenre(genre);
@@ -70,32 +74,35 @@ function EditMovieComp(props) {
         add genre
       </button>
       <br />
-      <select id="genres">
+      <select className="input" id="genres">
         {movie.genres &&
           movie.genres.map((genre, i) => {
             return (
-              <option key={i} value={i}>
+              <option className="input" key={i} value={i}>
                 {genre}
               </option>
             );
           })}
       </select>
       <button
+        className="btn"
         onClick={() => {
           deleteGenre(document.getElementById("genres").value);
         }}
       >
-        delete
+        delete genre
       </button>
       <br />
       image URL :{" "}
       <input
+        className="input"
         type="text"
         value={movie.image}
         onChange={(e) => setMovie({ ...movie, image: e.target.value })}
       />
       <br />
       <button
+        className="btn"
         style={{ marginRight: 5 }}
         onClick={async () => {
           dispatch({ type: "EDIT_MOVIE", payload: movie });
@@ -104,7 +111,9 @@ function EditMovieComp(props) {
       >
         update
       </button>
-      <button onClick={() => history.push("/movies")}>cancel</button>
+      <button className="btn" onClick={() => history.push("/movies")}>
+        cancel
+      </button>
     </div>
   );
 }

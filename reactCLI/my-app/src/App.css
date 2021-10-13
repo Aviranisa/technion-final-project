@@ -114,7 +114,7 @@
   max-height: 10vh;
 }
 
-.addNew {
+.addNewAndEdit {
   display: inline-grid;
   border: 1px solid;
   width: 205px;

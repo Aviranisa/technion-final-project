@@ -14,7 +14,7 @@ function AddMemberComp(props) {
   });
 
   return (
-    <div className="App" className="addNew">
+    <div className="App" className="addNewAndEdit">
       <span className="App-header">Add Member</span> <br />
       <input
         className="input"

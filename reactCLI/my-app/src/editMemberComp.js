@@ -29,10 +29,11 @@ function EditMemeberComp(props) {
   }, []);
 
   return (
-    <div className="App">
-      Edit member <br />
+    <div className="App" className="addNewAndEdit">
+      <span className="App-header">Edit member</span> <br />
       Member name :
       <input
+        className="input"
         type="text"
         value={member.fullName}
         onChange={(e) => setMember({ ...member, fullName: e.target.value })}
@@ -40,6 +41,7 @@ function EditMemeberComp(props) {
       <br />
       Email :{" "}
       <input
+        className="input"
         type="text"
         value={member.email}
         onChange={(e) => setMember({ ...member, email: e.target.value })}
@@ -47,12 +49,14 @@ function EditMemeberComp(props) {
       <br />
       image URL :{" "}
       <input
+        className="input"
         type="text"
         value={member.city}
         onChange={(e) => setMember({ ...member, city: e.target.value })}
       />
       <br />
       <button
+        className="btn"
         style={{ marginRight: 5 }}
         onClick={async () => {
           dispatch({ type: "EDIT_MEMBER", payload: member });
@@ -61,7 +65,9 @@ function EditMemeberComp(props) {
       >
         update
       </button>
-      <button onClick={() => history.push("/members")}>cancel</button>
+      <button className="btn" onClick={() => history.push("/members")}>
+        cancel
+      </button>
     </div>
   );
 }
